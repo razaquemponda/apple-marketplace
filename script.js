@@ -8,7 +8,7 @@ const products = [
         condition: "excellent",
         description: "Like new, 256GB, 100% battery health",
         icon: "fas fa-mobile-alt",
-        image: "https://razaquemponda.github.io/apple-marketplace/images/iphone13.jpg"
+        image: "images/iPhone13Pro.jpeg"
 
     },
     {
@@ -236,4 +236,5 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.addEventListener('click', hideSuccessNotification);
     }
 });
+
 
