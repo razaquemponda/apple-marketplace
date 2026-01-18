@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Apple Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fab fa-apple"></i> Apple Marketplace
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="products.html" class="active">Products</a>
+                <a href="#contact">Contact</a>
+                <a href="cart.html" class="order-btn">
+                    <i class="fas fa-shopping-cart"></i> Cart (<span id="cartCount">0</span>)
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="products-page">
+        <div class="container">
+            <h1>All Products</h1>
+            
+            <div class="filters">
+                <button onclick="filterProducts('all')" class="filter-btn active">All</button>
+                <button onclick="filterProducts('iphone')" class="filter-btn">iPhones</button>
+                <button onclick="filterProducts('macbook')" class="filter-btn">MacBooks</button>
+                <button onclick="filterProducts('accessories')" class="filter-btn">Accessories</button>
+            </div>
+            
+            <div class="product-grid" id="productGrid">
+                <!-- Products loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <script src="products.js"></script>
+</body>
+</html>

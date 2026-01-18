@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Marketplace - Premium Refurbished Devices</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fab fa-apple"></i> Apple Marketplace
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="active">home</a>
+                <a href="products.html">Products</a>
+                <a href="contact.html">Contact</a>
+                <a href="cart.html" class="order-btn"><i class="fas fa-shopping-cart"></i> cart (<span id="cartcourt">0</span>)</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Premium Apple Products</h1>
+            <p>Certified Refurbished • Eco-Friendly • Warranty Included</p>
+            <a href="#products" class="cta-button">Browse Products</a>
+        </div>
+    </header>
+
+    <!-- Product Categories -->
+    <section class="categories">
+        <h2>Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card" onclick="filterProducts('iphone')">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>iPhones</h3>
+                <p>Latest models available</p>
+            </div>
+            <div class="category-card" onclick="filterProducts('macbook')">
+                <i class="fas fa-laptop"></i>
+                <h3>MacBooks</h3>
+                <p>Powerful & portable</p>
+            </div>
+            <div class="category-card" onclick="filterProducts('accessories')">
+                <i class="fas fa-headphones"></i>
+                <h3>Accessories</h3>
+                <p>Complete your setup</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products" id="products">
+        <h2>Featured Products</h2>
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be loaded by JavaScript -->
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Browse Products</h3>
+                <p>Select from our certified refurbished Apple devices</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Place Order</h3>
+                <p>Fill the order form with your details</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Get Confirmation</h3>
+                <p>We'll contact you with payment options</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Receive Product</h3>
+                <p>Delivery or pickup as arranged</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Order <span id="productName"></span></h2>
+            <form id="orderForm" action="https://formspree.io/f/xgoovgqn" method="POST">
+                <input type="hidden" id="selectedProduct" name="product">
+                
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <select id="quantity" name="quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Additional Notes</label>
+                    <textarea id="message" name="message" rows="3"></textarea>
+                </div>
+                
+                <p class="payment-note">
+                    <i class="fas fa-info-circle"></i>
+                    After submitting, we'll contact you with payment options (Bank Transfer, Mobile Money, or Cash on Delivery).
+                </p>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Submit Order
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Apple Marketplace. Demo project for showcasing purposes.</p>
+        <p>All product names, logos, and brands are property of their respective owners.</p>
+    </footer>
+
+    <script src="script.js"></script>
+     <!-- Success Notification -->
+    <div class="notification-overlay" id="notificationOverlay"></div>
+    <div class="success-notification" id="successNotification">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        
+        <div class="success-content">
+            <h3>Order Confirmed! 🎉</h3>
+            <p>Thank you for your purchase!</p>
+            
+            <div class="success-details">
+                <p><strong>What happens next:</strong></p>
+                <p>✓ We'll contact you within 24 hours</p>
+                <p>✓ We'll provide payment details</p>
+                <p>✓ Your items will be prepared within 48hrs</p>
+            </div>
+            
+            <button class="success-btn" onclick="hideSuccessNotification()">
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+    <script src="cart.js"></script>
+
+    
+</body>
+</html>
