@@ -8,7 +8,7 @@ const products = [
         condition: "excellent",
         description: "Like new, 256GB, 100% battery health",
         icon: "fas fa-mobile-alt",
-        image:"images/iphone13pro.jpeg"
+        image:"images/iPhone13Pro.jpeg"
 
     },
     {
@@ -39,7 +39,7 @@ const products = [
         condition: "eco",
         description: "Refurbished, eco-friendly packaging",
         icon: "fas fa-mobile-alt",
-        image:"images/iphone11.jpeg"
+        image:"images/iPhone11.jpeg"
     },
     {
         id: 5,
@@ -155,6 +155,7 @@ window.onclick = function(event) {
 }
 
 // Form submission with Formspree
+// Form submission with Formspree
 function setupFormSubmission() {
     const form = document.getElementById('orderForm');
     
@@ -169,19 +170,7 @@ function setupFormSubmission() {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         
         try {
-            // This is where you'll integrate with Formspree
-            // For now, we'll simulate success
-                        setTimeout(() => {
-                // REMOVE THE ALERT AND USE OUR COOL NOTIFICATION INSTEAD
-                showSuccessNotification(); // <-- ADD THIS LINE
-                form.reset();
-                closeModal();
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-            }, 1500);
-            
-            // Uncomment and configure when you set up Formspree:
-            /*
+            // Submit to Formspree
             const formData = new FormData(form);
             const response = await fetch(form.action, {
                 method: 'POST',
@@ -192,17 +181,20 @@ function setupFormSubmission() {
             });
             
             if (response.ok) {
-                alert('Order submitted successfully! We will contact you within 24 hours.');
+                // USE THE COOL NOTIFICATION
+                showSuccessNotification();
                 form.reset();
                 closeModal();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
             } else {
                 alert('There was an error submitting your order. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
             }
-            */
             
         } catch (error) {
             alert('Network error. Please check your connection and try again.');
-        } finally {
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalText;
         }
