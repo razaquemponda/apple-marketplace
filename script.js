@@ -8,7 +8,7 @@ const products = [
         condition: "excellent",
         description: "Like new, 256GB, 100% battery health",
         icon: "fas fa-mobile-alt",
-        image:"images/iPhone13Pro.jpeg"
+        image:"images/iphone13pro.jpeg"
 
     },
     {
@@ -39,7 +39,7 @@ const products = [
         condition: "eco",
         description: "Refurbished, eco-friendly packaging",
         icon: "fas fa-mobile-alt",
-        image:"images/iPhone11.jpeg"
+        image:"images/iphone11.jpeg"
     },
     {
         id: 5,
