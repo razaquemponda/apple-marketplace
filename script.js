@@ -134,7 +134,7 @@ function openOrderModal(productName, productPrice) {
     const productInput = document.getElementById('selectedProduct');
     
     productNameElement.textContent = productName;
-    productInput.value = `${productName} - $${productPrice}`;
+    productInput.value = `${productName} - MWK${productPrice}`;
     
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -236,5 +236,6 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.addEventListener('click', hideSuccessNotification);
     }
 });
+
 
 
