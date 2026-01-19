@@ -1,3 +1,51 @@
+// Mobile Menu Functionality
+function setupMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const closeMenu = document.getElementById('closeMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            mobileMenu.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    if (closeMenu) {
+        closeMenu.addEventListener('click', closeMobileMenu);
+    }
+    
+    // Close menu when clicking outside
+    mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Close menu with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.style.display === 'block') {
+            closeMobileMenu();
+        }
+    });
+}
+
+function closeMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenu.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Update mobile cart count
+function updateMobileCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const count = cart.reduce((total, item) => total + item.quantity, 0);
+    const mobileCartCount = document.getElementById('mobileCartCount');
+    if (mobileCartCount) {
+        mobileCartCount.textContent = count;
+    }
+}
+
 // Load cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -262,6 +310,8 @@ function closeCheckoutModal() {
 document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
     displayCart();
+    updateMobileCartCount(); // Add this line
+    setupMobileMenu(); // Add this line
     
     // Setup checkout form
     const checkoutForm = document.getElementById('checkoutForm');
