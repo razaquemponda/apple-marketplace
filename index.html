@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Apple Marketplace - Premium Refurbished Devices</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -10,16 +10,59 @@
 </head>
 <body>
     <!-- Navigation -->
+       
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <i class="fab fa-apple"></i> Apple Marketplace
             </a>
-            <div class="nav-links">
-                <a href="index.html" class="active">home</a>
+            
+            <!-- Desktop Navigation -->
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="active">Home</a>
                 <a href="products.html">Products</a>
                 <a href="contact.html">Contact</a>
-                <a href="cart.html" class="order-btn"><i class="fas fa-shopping-cart"></i> cart (<span id="cartcourt">0</span>)</span></a>
+                <a href="cart.html" class="order-btn">
+                    <i class="fas fa-shopping-cart"></i> Cart (<span id="cartCount">0</span>)
+                </a>
+            </div>
+            
+            <!-- Mobile Hamburger Menu -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-content">
+                <div class="mobile-menu-header">
+                    <span class="logo">
+                        <i class="fab fa-apple"></i> Apple Marketplace
+                    </span>
+                    <button class="close-menu" id="closeMenu">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="mobile-links">
+                    <a href="index.html" onclick="closeMobileMenu()">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="products.html" onclick="closeMobileMenu()">
+                        <i class="fas fa-store"></i> Products
+                    </a>
+                    <a href="contact.html" onclick="closeMobileMenu()">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                    <a href="cart.html" class="mobile-cart-btn" onclick="closeMobileMenu()">
+                        <i class="fas fa-shopping-cart"></i> Shopping Cart
+                        <span class="cart-badge" id="mobileCartCount">0</span>
+                    </a>
+                </div>
+                <div class="mobile-contact">
+                    <p><i class="fas fa-phone"></i> +255 999 073 999</p>
+                    <p><i class="fas fa-envelope"></i> orders@applemarketplace.com</p>
+                </div>
             </div>
         </div>
     </nav>
