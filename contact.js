@@ -1,3 +1,21 @@
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+    setupMobileMenu();
+    setupContactForm();
+});
+
+// Update cart count
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const count = cart.reduce((total, item) => total + item.quantity, 0);
+    
+    // Update all cart counters
+    document.querySelectorAll('#cartCount').forEach(el => el.textContent = count);
+    document.querySelectorAll('#mobileCartCount').forEach(el => el.textContent = count);
+    document.querySelectorAll('#bottomCartCount').forEach(el => el.textContent = count);
+}
+
 // Mobile Menu Functionality
 function setupMobileMenu() {
     const hamburger = document.getElementById('hamburger');
@@ -6,8 +24,10 @@ function setupMobileMenu() {
     
     if (hamburger) {
         hamburger.addEventListener('click', () => {
-            mobileMenu.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+            if (mobileMenu) {
+                mobileMenu.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
         });
     }
     
@@ -16,63 +36,21 @@ function setupMobileMenu() {
     }
     
     // Close menu when clicking outside
-    mobileMenu.addEventListener('click', (e) => {
-        if (e.target === mobileMenu) {
-            closeMobileMenu();
-        }
-    });
-    
-    // Close menu with Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileMenu.style.display === 'block') {
-            closeMobileMenu();
-        }
-    });
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                closeMobileMenu();
+            }
+        });
+    }
 }
 
 function closeMobileMenu() {
     const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenu.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Update mobile cart count
-function updateMobileCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    const mobileCartCount = document.getElementById('mobileCartCount');
-    if (mobileCartCount) {
-        mobileCartCount.textContent = count;
+    if (mobileMenu) {
+        mobileMenu.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
-}
-
-// Update cart count
-function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    document.querySelectorAll('#cartCount').forEach(element => {
-        element.textContent = count;
-    });
-}
-
-// Show success notification
-function showSuccessNotification() {
-    const notification = document.getElementById('successNotification');
-    const overlay = document.getElementById('notificationOverlay');
-    
-    notification.style.display = 'block';
-    overlay.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-// Hide success notification
-function hideSuccessNotification() {
-    const notification = document.getElementById('successNotification');
-    const overlay = document.getElementById('notificationOverlay');
-    
-    notification.style.display = 'none';
-    overlay.style.display = 'none';
-    document.body.style.overflow = 'auto';
 }
 
 // Setup contact form
@@ -84,6 +62,8 @@ function setupContactForm() {
         e.preventDefault();
         
         const submitBtn = form.querySelector('.contact-submit');
+        if (!submitBtn) return;
+        
         const originalText = submitBtn.innerHTML;
         
         // Show loading
@@ -116,16 +96,44 @@ function setupContactForm() {
     });
 }
 
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    updateCartCount();
-    setupContactForm();
-    updateMobileCartCount(); // Add this line
-    setupMobileMenu(); // Add this line
+// Show success notification
+function showSuccessNotification() {
+    const notification = document.getElementById('successNotification');
+    const overlay = document.getElementById('notificationOverlay');
     
-    // Close notification when clicking overlay
+    if (notification && overlay) {
+        notification.style.display = 'block';
+        overlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Hide success notification
+function hideSuccessNotification() {
+    const notification = document.getElementById('successNotification');
+    const overlay = document.getElementById('notificationOverlay');
+    
+    if (notification && overlay) {
+        notification.style.display = 'none';
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Close notification when clicking overlay
+document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.getElementById('notificationOverlay');
     if (overlay) {
         overlay.addEventListener('click', hideSuccessNotification);
     }
+    
+    // Close with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const notification = document.getElementById('successNotification');
+            if (notification && notification.style.display === 'block') {
+                hideSuccessNotification();
+            }
+        }
+    });
 });
